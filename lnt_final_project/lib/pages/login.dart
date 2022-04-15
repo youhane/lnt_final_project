@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:lnt_final_project/pages/home.dart';
+import 'package:lnt_final_project/pages/register.dart';
 
 
-class LoginRegister extends StatefulWidget {
-  const LoginRegister({ Key? key }) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({ Key? key }) : super(key: key);
 
   @override
-  State<LoginRegister> createState() => _LoginRegisterState();
+  State<Login> createState() => _LoginState();
 }
 
-class _LoginRegisterState extends State<LoginRegister> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+class _LoginState extends State<Login> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,14 @@ class _LoginRegisterState extends State<LoginRegister> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              "Login",
+              style: TextStyle(
+                fontSize: 30,
+              ),
+            ),
             Container(
-              padding: EdgeInsets.only(bottom: 20, top: 20),
+              padding: const EdgeInsets.only(bottom: 20, top: 20),
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextFormField(
                 controller: _emailController,
@@ -35,7 +43,7 @@ class _LoginRegisterState extends State<LoginRegister> {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(bottom: 20, top: 20),
+              padding: const EdgeInsets.only(bottom: 20, top: 20),
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextFormField(
                 controller: _passwordController,
@@ -51,18 +59,28 @@ class _LoginRegisterState extends State<LoginRegister> {
               width: MediaQuery.of(context).size.width * 0.8,
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigator.pushNamed(context, '/home');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Home(),
+                    ),
+                  );
                 },
-                child: Text('Login'),
+                child: const Text('Login'),
               ),
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
-              child: ElevatedButton(
+              child: TextButton(
                 onPressed: () {
-                  // Navigator.pushNamed(context, '/home');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Register(),
+                    ),
+                  );
                 },
-                child: Text('Register'),
+                child: const Text('Register'),
               ),
             ),
           ],
