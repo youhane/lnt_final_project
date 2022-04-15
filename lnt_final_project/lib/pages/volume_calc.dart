@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:lnt_final_project/pages/area_calc.dart';
 import 'package:lnt_final_project/pages/counter.dart';
-import 'package:lnt_final_project/pages/volume_calc.dart';
 
-class AreaCalc extends StatefulWidget {
-  const AreaCalc({ Key? key }) : super(key: key);
+class VolumeCalc extends StatefulWidget {
+  const VolumeCalc({ Key? key }) : super(key: key);
 
   @override
-  State<AreaCalc> createState() => _AreaCalcState();
+  State<VolumeCalc> createState() => _VolumeCalcState();
 }
 
-class _AreaCalcState extends State<AreaCalc> {
+class _VolumeCalcState extends State<VolumeCalc> {
   final TextEditingController _lengthController = TextEditingController();
-  final TextEditingController _widthController = TextEditingController();
+  final TextEditingController _heightController = TextEditingController();
   final TextEditingController _radiusController = TextEditingController();
 
   final double _pi = 3.14;
@@ -21,14 +21,14 @@ class _AreaCalcState extends State<AreaCalc> {
   
   double _result = 0;
 
-  void _calculateArea() {
+  void _calculateVolume() {
     setState(() {
       if (isCircle) {
-        _result = _pi * double.parse(_radiusController.text) * double.parse(_radiusController.text);
+        _result = _pi * double.parse(_radiusController.text) * double.parse(_radiusController.text) * double.parse(_radiusController.text);
       } else if (isSquare){
-        _result = double.parse(_lengthController.text) * double.parse(_widthController.text);
+        _result = double.parse(_lengthController.text) * double.parse(_heightController.text) * double.parse(_lengthController.text);
       } else if(isTriangle) {
-        _result = (double.parse(_lengthController.text) * double.parse(_widthController.text)) / 2;
+        _result = (double.parse(_lengthController.text) * double.parse(_heightController.text) * double.parse(_lengthController.text)) / 6;
       }
     });
   }
@@ -51,7 +51,7 @@ class _AreaCalcState extends State<AreaCalc> {
     });
   }
 
-    void _onItemTapped(int index) {
+  void _onItemTapped(int index) {
     setState(() {
       switch (index) {
         case 0:
@@ -86,7 +86,7 @@ class _AreaCalcState extends State<AreaCalc> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Area Calculator"),
+        title: const Text("Volume Calculator"),
       ),
       drawer: Drawer(
         child: ListView(
@@ -117,13 +117,13 @@ class _AreaCalcState extends State<AreaCalc> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Visibility(
-              visible: isCircle,
+              visible: !isTriangle,
               child: Container(
                 padding: const EdgeInsets.only(left: 40, right: 40, top: 50),
                 child: TextFormField(
                   controller: _radiusController,
                   decoration: InputDecoration(
-                    labelText: 'Radius',
+                    labelText: isSquare ? 'Side' : 'Radius',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -132,13 +132,13 @@ class _AreaCalcState extends State<AreaCalc> {
               ),
             ),
             Visibility(
-              visible: !isCircle,
+              visible: isTriangle,
               child: Container(
                 padding: const EdgeInsets.only(left: 40, right: 40, top: 50),
                 child: TextFormField(
                   controller: _lengthController,
                   decoration: InputDecoration(
-                    labelText: isTriangle ? 'Base' : 'Length',
+                    labelText: 'Length',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -147,13 +147,13 @@ class _AreaCalcState extends State<AreaCalc> {
               ),
             ),
             Visibility(
-              visible: !isCircle,
+              visible: isTriangle,
               child: Container(
                 padding: const EdgeInsets.only(left: 40, right: 40, top: 20),
                 child: TextFormField(
-                  controller: _widthController,
+                  controller: _heightController,
                   decoration: InputDecoration(
-                    labelText: isTriangle ? 'Height' : 'Width',
+                    labelText: 'Height',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -162,8 +162,8 @@ class _AreaCalcState extends State<AreaCalc> {
               ),
             ),
             ElevatedButton(
-              onPressed: () {_calculateArea();}, 
-              child: const Text('Count Area')
+              onPressed: () {_calculateVolume();}, 
+              child: const Text('Count Volume')
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -200,7 +200,7 @@ class _AreaCalcState extends State<AreaCalc> {
           BottomNavigationBarItem(icon: Icon(Icons.calculate), label: "Area Calc"),
           BottomNavigationBarItem(icon: Icon(Icons.calculate_outlined), label: "Volume Calc"),
         ],
-        currentIndex: 1,
+        currentIndex: 2,
         onTap: _onItemTapped,
       ),
     );
