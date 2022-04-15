@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lnt_final_project/pages/home.dart';
 import 'package:lnt_final_project/pages/login.dart';
 import 'package:lnt_final_project/utils/flutterfire.dart';
 
@@ -21,6 +20,9 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Register"),
+      ),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -29,7 +31,7 @@ class _RegisterState extends State<Register> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
                Container(
-                 padding: const EdgeInsets.only(top: 45),
+                 padding: const EdgeInsets.only(top: 30),
                  child: const Text(
                   "Register",
                   style: TextStyle(

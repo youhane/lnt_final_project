@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lnt_final_project/pages/home.dart';
+import 'package:lnt_final_project/pages/counter.dart';
 import 'package:lnt_final_project/pages/register.dart';
+import 'package:lnt_final_project/utils/flutterfire.dart';
 
 
 class Login extends StatefulWidget {
@@ -17,13 +18,16 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Login"),
+      ),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "Login",
               style: TextStyle(
                 fontSize: 30,
@@ -62,7 +66,7 @@ class _LoginState extends State<Login> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Home(),
+                      builder: (context) => const Counter(),
                     ),
                   );
                 },
@@ -72,13 +76,17 @@ class _LoginState extends State<Login> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Register(),
-                    ),
-                  );
+                onPressed: () async {
+                  bool shouldNavigate = await LoginUser(context, _emailController.text, _passwordController.text);
+
+                  if (shouldNavigate) {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Register(),
+                      ),
+                    );
+                  }
                 },
                 child: const Text('Register'),
               ),

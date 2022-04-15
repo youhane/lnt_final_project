@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ Future<bool> RegisterAccount(BuildContext context, String bimbelID, String email
       email: email,
       password: password,
     );
+    addBimbel(context, bimbelID, email, name, password);
     return true;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
@@ -33,6 +35,42 @@ Future<bool> RegisterAccount(BuildContext context, String bimbelID, String email
       _showErrorMessage(context, 'Error occured: $e');
     }
     return false;
+  } catch (e) {
+    _showErrorMessage(context, 'Error occured: $e');
+    return false;
+  }
+}
+
+Future<bool> LoginUser(BuildContext context, String email, String password) async{
+  try {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return true;
+  } catch (e) {
+    _showErrorMessage(context, 'Error occured: $e');
+    return false;
+  }
+}
+
+Future<bool> addBimbel(BuildContext context, String bimbelID, String email, String name, String password) async{
+  try {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    DocumentReference newDocument = FirebaseFirestore.instance.collection('bimbel').doc(uid);
+    FirebaseFirestore.instance.runTransaction((transaction) async {
+      DocumentSnapshot newSnapshot = await transaction.get(newDocument);
+      if(!newSnapshot.exists){
+        newDocument.set({
+          'bimbelID': bimbelID,
+          'email': email,
+          'name': name,
+          'password': password,
+        });
+      }
+    });
+    return true;
   } catch (e) {
     _showErrorMessage(context, 'Error occured: $e');
     return false;
