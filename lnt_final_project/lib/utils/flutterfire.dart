@@ -54,6 +54,10 @@ Future<bool> LoginUser(BuildContext context, String email, String password) asyn
   }
 }
 
+Future<void> LogoutUser(BuildContext context) async {
+  await FirebaseAuth.instance.signOut();
+}
+
 Future<bool> addBimbel(BuildContext context, String bimbelID, String email, String name, String password) async{
   try {
     String uid = FirebaseAuth.instance.currentUser!.uid;
