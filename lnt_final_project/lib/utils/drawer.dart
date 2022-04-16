@@ -12,7 +12,7 @@ class ProfileDrawer extends StatefulWidget {
 
 class _ProfileDrawerState extends State<ProfileDrawer> {
 
-  String? uid = FirebaseAuth.instance.currentUser.toString();
+  String? uid = FirebaseAuth.instance.currentUser?.uid;
   String bimbelName = "";
   String bimbelId = "";
   String bimbelMail = "";
@@ -27,7 +27,7 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
     FirebaseFirestore.instance.runTransaction((transaction) async {
       DocumentSnapshot snapshot = await transaction.get(currentUser);
       if (!snapshot.exists) {
-        print(uid);
+        print("Error, could not get User");
       } else{
         bimbelName = snapshot['name'];
         bimbelId = snapshot['bimbelID'];
@@ -42,7 +42,12 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text('Profile'),
+              child: Text(
+                'Profile',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
             ListTile(
               title: Text(bimbelName),

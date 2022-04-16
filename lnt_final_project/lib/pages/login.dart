@@ -28,10 +28,13 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Login",
-                style: TextStyle(
-                  fontSize: 30,
+              const Padding(
+                padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
                 ),
               ),
               Container(
@@ -63,20 +66,6 @@ class _LoginState extends State<Login> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Counter(),
-                      ),
-                    );
-                  },
-                  child: const Text('Login'),
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextButton(
                   onPressed: () async {
                     bool shouldNavigate = await LoginUser(context, _emailController.text, _passwordController.text);
         
@@ -84,10 +73,24 @@ class _LoginState extends State<Login> {
                         Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Register(),
+                          builder: (context) => const Counter(),
                         ),
                       );
                     }
+                  },
+                  child: const Text('Login'),
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Register(),
+                      ),
+                    );
                   },
                   child: const Text('Register'),
                 ),

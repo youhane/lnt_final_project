@@ -52,7 +52,7 @@ class _AreaCalcState extends State<AreaCalc> {
     });
   }
 
-    void _onItemTapped(int index) {
+  void _onItemTapped(int index) {
     setState(() {
       switch (index) {
         case 0:
@@ -139,29 +139,44 @@ class _AreaCalcState extends State<AreaCalc> {
                 )
               ),
             ),
-            ElevatedButton(
-              onPressed: () {_calculateArea();}, 
-              child: const Text('Count Area')
+            Container(
+              margin: const EdgeInsets.all(35.0),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(12)),
+                ),
+                onPressed: () {_calculateArea();}, 
+                child: const Text(
+                  'Count Area',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FloatingActionButton(
-                  onPressed: () {_changeShape("Square");}, 
-                  child: const Icon(Icons.square),
-                  heroTag: null,
-                ),
-                FloatingActionButton(
-                  onPressed: () {_changeShape("Circle");}, 
-                  child: const Icon(Icons.circle),
-                  heroTag: null,
-                ),
-                FloatingActionButton(
-                  onPressed: () {_changeShape("Triangle");}, 
-                  child: const Icon(Icons.arrow_drop_up, size: 50.0,),
-                  heroTag: null,
-                ),
-              ],
+            Container(
+              margin: const EdgeInsets.only(bottom: 40.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FloatingActionButton(
+                    onPressed: () {_changeShape("Square");}, 
+                    child: const Icon(Icons.square),
+                    heroTag: null,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {_changeShape("Circle");}, 
+                    child: const Icon(Icons.circle),
+                    heroTag: null,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () {_changeShape("Triangle");}, 
+                    child: const Icon(Icons.arrow_drop_up, size: 50.0,),
+                    heroTag: null,
+                  ),
+                ],
+              ),
             ),
             Text(
               _result.toStringAsFixed(2).toString(), 

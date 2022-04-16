@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lnt_final_project/pages/login.dart';
 
 void _showErrorMessage(BuildContext context, String message) {
   final scaffold = ScaffoldMessenger.of(context);
@@ -47,6 +48,7 @@ Future<bool> LoginUser(BuildContext context, String email, String password) asyn
       email: email,
       password: password,
     );
+    
     return true;
   } catch (e) {
     _showErrorMessage(context, 'Error occured: $e');
@@ -56,6 +58,12 @@ Future<bool> LoginUser(BuildContext context, String email, String password) asyn
 
 Future<void> LogoutUser(BuildContext context) async {
   await FirebaseAuth.instance.signOut();
+   Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const Login(),
+    ),
+  );
 }
 
 Future<bool> addBimbel(BuildContext context, String bimbelID, String email, String name, String password) async{
