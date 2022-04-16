@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lnt_final_project/pages/area_calc.dart';
 import 'package:lnt_final_project/pages/counter.dart';
+import 'package:lnt_final_project/utils/drawer.dart';
 
 class VolumeCalc extends StatefulWidget {
   const VolumeCalc({ Key? key }) : super(key: key);
@@ -88,30 +89,7 @@ class _VolumeCalcState extends State<VolumeCalc> {
       appBar: AppBar(
         title: const Text("Volume Calculator"),
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: const [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Profile'),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-            ),
-          ],
-        ),
-      ),
+      drawer: const ProfileDrawer(),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -24,74 +24,76 @@ class _LoginState extends State<Login> {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "Login",
-              style: TextStyle(
-                fontSize: 30,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(bottom: 20, top: 20),
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Login",
+                style: TextStyle(
+                  fontSize: 30,
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(bottom: 20, top: 20),
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Counter(),
+              Container(
+                padding: const EdgeInsets.only(bottom: 20, top: 20),
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                  );
-                },
-                child: const Text('Login'),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: TextButton(
-                onPressed: () async {
-                  bool shouldNavigate = await LoginUser(context, _emailController.text, _passwordController.text);
-
-                  if (shouldNavigate) {
-                      Navigator.push(
+              Container(
+                padding: const EdgeInsets.only(bottom: 20, top: 20),
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Register(),
+                        builder: (context) => const Counter(),
                       ),
                     );
-                  }
-                },
-                child: const Text('Register'),
+                  },
+                  child: const Text('Login'),
+                ),
               ),
-            ),
-          ],
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: TextButton(
+                  onPressed: () async {
+                    bool shouldNavigate = await LoginUser(context, _emailController.text, _passwordController.text);
+        
+                    if (shouldNavigate) {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Register(),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Register'),
+                ),
+              ),
+            ],
+          ),
         )
       ),
     );

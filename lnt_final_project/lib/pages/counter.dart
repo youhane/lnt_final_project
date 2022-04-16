@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lnt_final_project/pages/area_calc.dart';
 import 'package:lnt_final_project/pages/volume_calc.dart';
+import 'package:lnt_final_project/utils/drawer.dart';
 
 class Counter extends StatefulWidget {
   const Counter({ Key? key }) : super(key: key);
@@ -61,30 +62,7 @@ class _CounterState extends State<Counter> {
       appBar: AppBar(
         title: const Text("Counter"),
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: const [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Profile'),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-            ),
-            ListTile(
-              title: Text('Item 1'),
-            ),
-          ],
-        ),
-      ),
+      drawer: const ProfileDrawer(),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
