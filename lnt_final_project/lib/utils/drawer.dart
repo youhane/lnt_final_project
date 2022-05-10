@@ -19,19 +19,26 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
 
   @override
   Widget build(BuildContext context) {
-
     DocumentReference currentUser = FirebaseFirestore.instance
     .collection('bimbel')
     .doc(uid);
+
+    void setStateIfMounted(f){
+      if(mounted){
+        setState(f);
+      }
+    }
 
     FirebaseFirestore.instance.runTransaction((transaction) async {
       DocumentSnapshot snapshot = await transaction.get(currentUser);
       if (!snapshot.exists) {
         print("Error, could not get User");
-      } else{
-        bimbelName = snapshot['name'];
-        bimbelId = snapshot['bimbelID'];
-        bimbelMail = snapshot['email'];
+      } else {
+        setStateIfMounted(() {
+          bimbelName = snapshot['name'];
+          bimbelId = snapshot['bimbelID'];
+          bimbelMail = snapshot['email'];
+        });
       }
     });
 

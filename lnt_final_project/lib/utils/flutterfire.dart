@@ -8,9 +8,10 @@ void _showErrorMessage(BuildContext context, String message) {
   scaffold.showSnackBar(
     SnackBar(
       backgroundColor: Colors.red,
-      content: Text(context.toString()),
+      content: Text(message),
       action: SnackBarAction(
         label: 'OK',
+        textColor: Colors.white,
         onPressed: scaffold.hideCurrentSnackBar,
       ),
     ),
@@ -51,7 +52,7 @@ Future<bool> LoginUser(BuildContext context, String email, String password) asyn
     
     return true;
   } catch (e) {
-    _showErrorMessage(context, 'Error occured: $e');
+    _showErrorMessage(context, 'Incorrect Email or Password');
     return false;
   }
 }
